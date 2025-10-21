@@ -1,298 +1,200 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="ja">
-<meta charset="UTF-8">
-
-<!-- /etc/nginx/sites-available --接続先のサーバー情報>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta http-equiv="Content-Script-Type" content="text/javascript">
-    <meta http-equiv="Content-Style-Type" content="text/css">
-    <meta name="keywords" content="文科省,文部科学省,食品,食品成分,日本食品標準成分表">
-    <meta name="description" content="食品成分データベースは、食品成分に関するデータをインターネットを通じて提供しているものです。 ">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="食品成分データベースは、食品成分情報をわかりやすく提供するサイトです。">
     <title>食品成分データベース</title>
-    <link rel="canonical" href="https://fooddb.mext.go.jp/">
-    <link rel="prefetch" href="search.html">
-    <link rel="History" href="history.html">
-    <link rel="What's About" href="whats.html">
-    <link rel="Next" href="search.html">
-    <link rel="Help" href="help.html">
-    <link rel="Contact" href="mail.html">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/jqModal.css">
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.js"></script>
-    <script type="text/javascript" src="js/jquery.rollover.js"></script>
-    <script type="text/javascript" src="js/jqModal.js"></script>
-    <script type="text/JavaScript" src="js/jquery.ui.core.js"></script>
-    <script type="text/JavaScript" src="js/jquery.selectable.js"></script>
-    <script type="text/javascript" src="js/base.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="js/fontsize.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        var unitName = {
-            g: 'グラム',
-            mg: 'ミリグラム',
-            'μg': 'マイクログラム'
-        };
-        jQuery(document).ready(
-            function () {
-                jQuery.fx.off = true;
-                // 検索ボックス
-                jQuery('#searchbox').on('load',
-                    function () {
-                        //if (jQuery.support['boxModel'])
-                        jQuery('#searchbox_field').height(
-                            jQuery('#searchbox').height() + 30
-                        );
-                    }
-                );
-                jQuery('#searchbox').animate({ top: '140px' }, 1800, 'easeOutBounce');
-                // 高さを揃える
-                if (jQuery('#result').height() > jQuery('#result_acc').height()) {
-                    jQuery('#result_acc').css('height', jQuery('#result').height());
-                    jQuery('#result').css('height', jQuery('#result').height());
-                } else {
-                    jQuery('#result_acc').css('height', jQuery('#result_acc').height());
-                    jQuery('#result').css('height', jQuery('#result_acc').height());
-                }
-            }
-        );
-    </script>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Tailwind（CDN） -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
 </head>
 
-<body>
-    <div id="header">
-        <h1><img src="images/title.gif" width="340" height="90" alt="食品成分データベース"></h1>
-        <img src="images/new_image.jpg" alt="新しい画像" width="300" height="200"> <!-- 新しい画像を追加 -->
-<img src="images/food.jpg" width="355" height="90" alt="" class="food">
-<div class="logo"><a href="http://www.mext.go.jp/" target="_blank"><img src="images/logo.gif" width="170" height="50"
-            alt="文部科学省"></a></div>
-<div id="SizeChanger">文字サイズ&nbsp;<a href="#" class="changeBtn">標準</a><a href="#" class="changeBtn">大</a><a href="#"
-        class="changeBtn">特大</a></div>
-</div>
-<div id="contens">
-    <div id="header">
-        <h1><img src="images/title.gif" width="340" height="90" alt="食品成分データベース"></h1>
-        <img src="images/food.jpg" width="355" height="90" alt="" class="food">
-        <div class="logo"><a href="http://www.mext.go.jp/" target="_blank"><img src="images/logo.gif" width="170"
-                    height="50" alt="文部科学省"></a></div>
-        <div id="SizeChanger">文字サイズ&nbsp;<a href="#" class="changeBtn">標準</a><a href="#" class="changeBtn">大</a><a
-                href="#" class="changeBtn">特大</a></div>
-    </div>
-    <div id="menu">
-        <ul>
-            <li><a href="index.pl"><img src="images/home.gif" alt="HOME" width="176" height="50" class="rollover"></a>
-            </li>
-            <li><a href="whats.html"><img src="images/menu1.gif" alt="食品成分DBとは？" width="176" height="50"
-                        class="rollover"></a></li>
-            <li><a href="search.html"><img src="images/menu2.gif" alt="検索" width="176" height="50" class="rollover"></a>
-            </li>
-            <li><a href="help.html"><img src="images/menu3.gif" alt="ヘルプ" width="176" height="50" class="rollover"></a>
-            </li>
-            <li><a href="mail.html"><img src="images/menu4.gif" alt="お問い合わせ" width="176" height="50"
-                        class="rollover"></a></li>
-        </ul>
-        <!--検索-->
-        <div id="searchbox_field">
-            <iframe class="searchbox" src="./freeword/searchbox.pl?CLEAR=1" border="0" frameborder="0" scrolling="no"
-                allowtransparency="true" id="searchbox" name="searchbox"></iframe>
-        </div>
-        <img src="images/bar.gif" width="880" height="10" alt="">
-    </div>
-
-    <div style="text-align:right;padding-top:8px;padding-right:8px;padding-bottom:0px;"><span id="last_update_date"
-            style="font-size: 12px">最終更新日：2023年 8月16日</span></div>
-    <!--2022 START-->
-    <!--注意事項-->
-    <div id="attention">
-        <h2><img src="images/t-attention.gif" width="420" height="25" alt="注意事項"></h2>
-
-        <p style="color:#9C1A22;font-weight:bold;font-size:85%;">文部科学省は、<a
-                href="https://www.mext.go.jp/a_menu/syokuhinseibun/mext_00001.html"
-                target="_blank">「日本食品標準成分表（八訂）増補2023年」</a>を公表しました。<br />
-            <span style="color:#FFA500">「日本食品標準成分表（八訂）増補2023年」に対応しました。</span>
-        </p>
-
-        <p style="color:#9C1A22;font-weight:bold;font-size:85%;">検索結果において、カッコつき数字を計算対象にしました。</p>
-
-    </div>
-    <!--2022 END-->
-    <div id="ranking"><!--アクセスランキング-->
-        <div id="rank-left">
-            <h2><img src="images/t-rank1.gif" width="420" height="25" alt="人気食品アクセスランキング"></h2>
-            <div id="result_acc">
-                <table class="rank striped" summary="食品別アクセスランキング、 5位まで。">
-                    <caption>2025年 4月10日 : アクセスTop 5</caption>
-                    <thead>
-                        <tr>
-                            <th class="order" scope="col">順位</th>
-                            <th class="food_name" scope="col">食品名</th>
-                            <th class="amount" scope="col">アクセス数</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="odd">
-                            <th class="order" scope="row">1</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=12_12004_7"
-                                    target="_blank">卵類/鶏卵/全卵/生</a></td>
-                            <td class="amount">453</td>
-                        </tr>
-
-                        <tr class="even">
-                            <th class="order" scope="row">2</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01088_7"
-                                    target="_blank">穀類/こめ/［水稲めし］/精白米/うるち米</a></td>
-                            <td class="amount">405</td>
-                        </tr>
-
-                        <tr class="odd">
-                            <th class="order" scope="row">3</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=1_01083_7"
-                                    target="_blank">穀類/こめ/［水稲穀粒］/精白米/うるち米</a></td>
-                            <td class="amount">197</td>
-                        </tr>
-
-                        <tr class="even">
-                            <th class="order" scope="row">4</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=13_13003_7"
-                                    target="_blank">乳類/＜牛乳及び乳製品＞/（液状乳類）/普通牛乳</a></td>
-                            <td class="amount">192</td>
-                        </tr>
-
-                        <tr class="odd">
-                            <th class="order" scope="row">5</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=6_06263_7"
-                                    target="_blank">野菜類/ブロッコリー/花序/生</a></td>
-                            <td class="amount">181</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+<body class="text-gray-800">
+    <!-- ヘッダー -->
+    <header class="bg-green-700 text-white shadow-md">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+            <div class="flex items-center gap-3">
+                <img src="images/logo.gif" alt="文部科学省" class="h-10">
+                <h1 class="text-xl font-semibold">食品成分データベース</h1>
             </div>
-            <div class="btn"><a href="access/access.html"><img src="images/rank01.gif" width="212" height="15"
-                        alt="人気食品アクセスランキング検索" class="rollover"></a></div>
+            <nav class="hidden md:flex gap-6 text-sm">
+                <a href="index.html" class="hover:underline">ホーム</a>
+                <a href="whats.html" class="hover:underline">食品成分DBとは</a>
+                <a href="search.html" class="hover:underline">検索</a>
+                <a href="help.html" class="hover:underline">ヘルプ</a>
+                <a href="mail.html" class="hover:underline">お問い合わせ</a>
+            </nav>
         </div>
-        <!--食品成分ランキング-->
-        <div id="rank-right">
-            <h2><img src="images/t-rank2.gif" width="420" height="25" alt="食品成分ランキング"></h2>
-            <div id="result">
-                <table class="rank striped" summary="食品成分のランキング、 5位まで。">
-                    <caption>鉄 : 含有量Top 5</caption>
-                    <thead>
-                        <tr>
-                            <th class="order" scope="col">順位</th>
-                            <th class="food_name" scope="col">食品名</th>
-                            <th class="amount" scope="col">成分量<br /><span class="remark">100<abbr
-                                        title="グラム">g</abbr>あたり</span><abbr title="ミリグラム">mg</abbr></th>
-                        </tr>
+    </header>
 
-                    </thead>
-                    <tbody>
-                        <tr class="odd">
-                            <th class="order" scope="row">1</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=17_17077_7"
-                                    target="_blank">調味料及び香辛料類/＜香辛料類＞/バジル/粉</a>
-                            <td class="amount">120.0</td>
+    <!-- メイン -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
 
-                        </tr>
+        <!-- 検索ボックス -->
+        <div class="wrap" role="application" aria-label="食品検索ワイヤーフレーム PC版">
+            <header class="header">
+                <div style="flex:1">
+                    <label for="q" class="hint">キーワードで検索（食品名・成分名）</label>
+                    <div class="search-input">
+                        <input id="q" type="text" placeholder="🔍 キーワード入力（例：納豆、鉄）" aria-label="キーワード入力" />
+                    </div>
+                </div>
 
-                        <tr class="even">
-                            <th class="order" scope="row">2</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=17_17071_7"
-                                    target="_blank">調味料及び香辛料類/＜香辛料類＞/タイム/粉</a>
-                            <td class="amount">110.0</td>
+                <!-- 食品カテゴリー -->
+                <div style="width:220px">
+                    <label for="category" class="hint">食品カテゴリ</label>
+                    <select id="category" class="select" aria-label="食品カテゴリ">
+                        <option value="">すべてのカテゴリ</option>
+                        <option>野菜類</option>
+                        <option>果実類</option>
+                        <option>魚介類</option>
+                        <option>穀類</option>
+                        <option>乳製品</option>
+                        <option>加工品</option>
+                    </select>
+                </div>
 
-                        </tr>
+                <!-- ランキング -->
+                <div style="width:220px">
+                    <label for="category" class="hint">食品カテゴリ</label>
+                    <select id="category" class="select" aria-label="食品カテゴリ">
+                        <option value="">すべてのカテゴリ</option>
+                        <option>野菜類</option>
+                        <option>果実類</option>
+                        <option>魚介類</option>
+                        <option>穀類</option>
+                        <option>乳製品</option>
+                        <option>加工品</option>
+                    </select>
+                </div>
 
-                        <tr class="odd">
-                            <th class="order" scope="row">3</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=2_02042_7"
-                                    target="_blank">いも及びでん粉類/＜いも類＞/こんにゃく/赤こんにゃく</a>
-                            <td class="amount">78.0</td>
+                <!-- 食品カテゴリ  -->
+                <div class="nutrient-block">
+                    <div class="toggle-button">＋ 食品カテゴリを追加</div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> 鉄</label>
+                        <label><input type="checkbox"> カルシウム</label>
+                        <label><input type="checkbox"> ビタミンC</label>
+                        <label><input type="checkbox"> たんぱく質</label>
+                        <label><input type="checkbox"> 食物繊維</label>
+                    </div>
+                </div>
+                <!-- 栄養素条件 -->
+                <div class="nutrient-block">
+                    <div class="toggle-button">＋ 栄養素条件を追加</div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> 鉄</label>
+                        <label><input type="checkbox"> カルシウム</label>
+                        <label><input type="checkbox"> ビタミンC</label>
+                        <label><input type="checkbox"> たんぱく質</label>
+                        <label><input type="checkbox"> 食物繊維</label>
+                    </div>
+                </div>
+                <!-- 詳細検索条件 -->
+                <div class="nutrient-block">
+                    <div class="toggle-button">＋ 詳細検索条件</div>
+                    <div class="checkbox-group">
+                        <!-- 塩分制限のトグル -->
+                        <div class="toggle-button sub-toggle">＋ 栄養バランス指定（P/F/C）</div>
+                        <ul class="sub-list">
+                            <label><input type="checkbox" name="low-salt"> P</label>
+                            <label><input type="checkbox" name="medium-salt"> F</label>
+                            <label><input type="checkbox" name="high-salt"> C</label>
+                        </ul>
+                        <!-- 塩分制限のトグル -->
+                        <div class="toggle-button sub-toggle">＋ 塩分制限</div>
+                        <ul class="sub-list">
+                            <label><input type="checkbox" name="low-salt"> 低塩</label>
+                            <label><input type="checkbox" name="medium-salt"> 中塩</label>
+                            <label><input type="checkbox" name="high-salt"> 高塩</label>
+                        </ul>
+                        <!-- 塩分制限のトグル -->
+                        <div class="toggle-button sub-toggle">＋ 食品の状態（生／加工）</div>
+                        <ul class="sub-list">
+                            <label><input type="checkbox" name="low-salt"> 生</label>
+                            <label><input type="checkbox" name="medium-salt"> 加工</label>
+                        </ul>
+                        <!-- 塩分制限のトグル -->
+                        <div class="toggle-button sub-toggle">＋ よく使う用途（和／洋／中）</div>
+                        <ul class="sub-list">
+                            <label><input type="checkbox" name="low-salt"> 和</label>
+                            <label><input type="checkbox" name="medium-salt"> 洋</label>
+                            <label><input type="checkbox" name="medium-salt"> 中</label>
+                        </ul>
+                    </div>
+                    <!-- 食品群別閲覧 -->
+                    <div class="nutrient-block">
+                        <div class="toggle-button">＋ 栄養素条件を追加</div>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox"> 鉄</label>
+                            <label><input type="checkbox"> カルシウム</label>
+                            <label><input type="checkbox"> ビタミンC</label>
+                            <label><input type="checkbox"> たんぱく質</label>
+                            <label><input type="checkbox"> 食物繊維</label>
+                        </div>
+                    </div>
+                </div>
 
-                        </tr>
-
-                        <tr class="even">
-                            <th class="order" scope="row">4</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=9_09002_7"
-                                    target="_blank">藻類/あおのり/素干し</a>
-                            <td class="amount">77.0</td>
-
-                        </tr>
-
-                        <tr class="odd">
-                            <th class="order" scope="row">5</th>
-                            <td class="food_name"><a
-                                    href="https://fooddb.mext.go.jp/details/details.pl?ITEM_NO=10_10024_7"
-                                    target="_blank">魚介類/＜魚類＞/あゆ/天然/内臓/焼き</a>
-                            <td class="amount">63.0</td>
-
-                        </tr>
-                    </tbody>
-                </table>
-                <ul class="notice">
 
 
+                <!-- script.js を読み込む -->
+                <script src="script.js"></script>
 
 
-                </ul>
-            </div>
-            <div class="btn"><a href="ranking/ranking.html"><img src="images/rank02.gif" width="151" height="15"
-                        alt="食品成分ランキング検索" class="rollover"></a></div>
-        </div>
-    </div>
-    <!-- メンテナンスメッセージ  2010/01/12 --> <!--#include virtual="/announce/maintenance.pl"-->
-    <div id="new"><!--what's New?-->
-        <div id="new-left">
-            <h2><img src="images/t-new.gif" width="420" height="25" alt="更新履歴"></h2>
-            <table summary="更新履歴" class="whats_new">
-                <tbody id="history_window_new">
-                    <tr>
-                        <th class="date" scope="row">2023年 8月16日</th>
-                        <td>日本食品標準成分表(八訂)増補2023年に対応しました。</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="btn"><a href="history.pl"><img src="images/btn03.gif" width="81" height="14" alt="過去の更新履歴"
-                        class="rollover"></a></div>
-        </div>
-        <!--注意書き-->
-        <div id="new-right">
-            <div class="hako">このデータベースは、文部科学省が開発したものであり、試験的に公開しているものです。
-                <ul class="rights_expression" style="color: red">
-                    <li>本ホームページのデータは八訂成分表（2023年更新分まで）の値となります。</li>
-                    <li>最新データを書籍等へ御利用されるときは、文部科学省のホームページから「日本食品標準成分表（八訂）増補2023年」を参照し、引用してください。
-                        また、食品成分データの利用及び引用については、<a href="https://www.mext.go.jp/a_menu/syokuhinseibun/"
-                            target="_blank">「日本食品標準成分表・資源に関する取組」</a>のページをご参照願います。</li>
-                    <li>このデータベースシステムの使用により使用者が被ったいかなる損害に対しても、文部科学省は一切責任を負いません。</li>
-                    <li>このデータベースでは、インターネットドメイン名、IPアドレス等の情報を自動的に収集します。また、クッキーを利用し、当サイトの閲覧等の情報を自動的に収集しています。<br />
-                        収集した情報は、このデータベースを円滑に運営するための参考として利用します。<br />
-                        クッキーを使用して御利用者個人を識別できる情報は収集していません。<br />
-                        なお、統計的に処理されたこのデーターベースのアクセス情報、利用者属性等の情報については公表することがあります。</li>
-                </ul>
-            </div>
-        </div>
-        <div id="counter"><img src="/counter/images1/3.gif" alt="3" border=0><img src="/counter/images1/9.gif" alt="9"
-                border=0><img src="/counter/images1/4.gif" alt="4" border=0><img src="/counter/images1/1.gif" alt="1"
-                border=0><img src="/counter/images1/0.gif" alt="0" border=0><img src="/counter/images1/9.gif" alt="9"
-                border=0><img src="/counter/images1/5.gif" alt="5" border=0><img src="/counter/images1/8.gif" alt="8"
-                border=0></div>
-    </div>
-    <img src="images/footer.gif" width="880" height="50"
-        alt="Copyright &copy; Japan Science and Technology Agency. All rights reserved." class="clear">
-</div>
+                <!-- Nutrient chips (added conditions) -->
+                <div id="nutrient-area" style="margin-bottom:8px;display:none">
+                    <div class="nutrient-list" id="nutrient-list"></div>
+                    <div class="hint">※ 栄養素条件は「鉄: &gt;= 2mg」のように追加できます（ワイヤー実装）</div>
+                </div>
+                <div class="bg-white shadow-md rounded-2xl p-6">
+                    <h3 class="text-lg font-semibold mb-3">鉄：含有量トップ5（100gあたり）</h3>
+                    <ol class="list-decimal pl-5 space-y-1 text-sm">
+                        <li>バジル（粉） — 120mg</li>
+                        <li>タイム（粉） — 110mg</li>
+                        <li>赤こんにゃく — 78mg</li>
+                        <li>あおのり（素干し） — 77mg</li>
+                        <li>あゆ（内臓・焼き） — 63mg</li>
+                    </ol>
+                </div>
+                </section>
+
+                <!-- 更新情報 -->
+                <section class="bg-white shadow-md rounded-2xl p-6">
+                    <h3 class="text-lg font-semibold mb-3">更新情報</h3>
+                    <ul class="text-sm space-y-2">
+                        <li>📅 2023年8月16日：日本食品標準成分表（八訂）増補2023年に対応しました。</li>
+                    </ul>
+                </section>
+
+                <!-- 注意事項 -->
+                <section class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
+                    <h3 class="text-lg font-semibold text-yellow-800 mb-3">注意事項</h3>
+                    <p class="text-sm text-yellow-900 leading-relaxed">
+                        本データベースは文部科学省が提供する情報に基づき、食品成分データを検索・閲覧できるサイトです。<br>
+                        最新データは公式ページの「日本食品標準成分表（八訂）増補2023年」をご確認ください。
+                    </p>
+                </section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-gray-100 text-center py-6 text-sm text-gray-600">
+        © 2025 Japan Science and Technology Agency. All rights reserved.
+    </footer>
 </body>
 
 </html>
