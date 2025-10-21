@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 50px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.search-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+select,
+input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.advanced-search {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.advanced-search label {
+    display: block;
+    margin: 10px 0;
+}
+
+.alignment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /* 要素間の間隔を調整 */
+}
+
+.alignment label,
+.alignment input {
+    margin: 5px;
+    /* ラベルや入力フィールドの余白調整 */
+}
