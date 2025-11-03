@@ -6,193 +6,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="食品成分データベースは、食品成分情報をわかりやすく提供するサイトです。">
     <title>食品成分データベース</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Tailwind（CDN） -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
 
     <!-- フォント -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet"> -->
 
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
             background-color: #f8fafc;
+            color: #333;
+        }
+
+        header,
+        footer {
+            text-align: center;
+        }
+
+        header {
+            background-color: #2f855a;
+            color: white;
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
 
-<body class="text-gray-800">
+<body>
     <!-- ヘッダー -->
-    <header class="bg-green-700 text-white shadow-md">
-        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
-            <div class="flex items-center gap-3">
-                <img src="images/logo.gif" alt="文部科学省" class="h-10">
-                <h1 class="text-xl font-semibold">食品成分データベース</h1>
-            </div>
-            <nav class="hidden md:flex gap-6 text-sm">
-                <a href="index.html" class="hover:underline">ホーム</a>
-                <a href="whats.html" class="hover:underline">食品成分DBとは</a>
-                <a href="search.html" class="hover:underline">検索</a>
-                <a href="help.html" class="hover:underline">ヘルプ</a>
-                <a href="mail.html" class="hover:underline">お問い合わせ</a>
-            </nav>
+    <header>
+        <div>
+            <img src="images/logo.gif" alt="文部科学省" style="height:40px; vertical-align:middle;">
+            <h1 style="display:inline-block; margin-left:10px; font-size:20px;">食品成分データベース</h1>
         </div>
+        <nav>
+            <a href="index.html">ホーム</a>
+            <a href="whats.html">食品成分DBとは</a>
+            <a href="search.html">検索</a>
+            <a href="help.html">ヘルプ</a>
+            <a href="mail.html">お問い合わせ</a>
+        </nav>
     </header>
 
     <!-- メイン -->
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <main>
 
         <!-- 検索ボックス -->
-        <div class="wrap" role="application" aria-label="食品検索ワイヤーフレーム PC版">
-            <header class="header">
-                <div style="flex:1">
-                    <label for="q" class="hint">キーワードで検索（食品名・成分名）</label>
-                    <div class="search-input">
-                        <input id="q" type="text" placeholder="🔍 キーワード入力（例：納豆、鉄）" aria-label="キーワード入力" />
-                    </div>
+        <section>
+            <h2>食品検索</h2>
+            <div>
+                <label for="q" class="hint">食品検索</label>
+                <div class="search-input">
+                    <input id="q" type="text" placeholder="🔍 キーワード入力（例：納豆、鉄）" aria-label="キーワード入力">
                 </div>
+            </div>
 
-                <!-- 食品カテゴリー -->
-                <div style="width:220px">
-                    <label for="category" class="hint">食品カテゴリ</label>
-                    <select id="category" class="select" aria-label="食品カテゴリ">
-                        <option value="">すべてのカテゴリ</option>
-                        <option>野菜類</option>
-                        <option>果実類</option>
-                        <option>魚介類</option>
-                        <option>穀類</option>
-                        <option>乳製品</option>
-                        <option>加工品</option>
-                    </select>
-                </div>
-
-                <!-- ランキング -->
-                <div style="width:220px">
-                    <label for="category" class="hint">食品カテゴリ</label>
-                    <select id="category" class="select" aria-label="食品カテゴリ">
-                        <option value="">すべてのカテゴリ</option>
-                        <option>野菜類</option>
-                        <option>果実類</option>
-                        <option>魚介類</option>
-                        <option>穀類</option>
-                        <option>乳製品</option>
-                        <option>加工品</option>
-                    </select>
-                </div>
-
-                <!-- 食品カテゴリ  -->
-                <div class="nutrient-block">
-                    <div class="toggle-button">＋ 食品カテゴリを追加</div>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox"> 鉄</label>
-                        <label><input type="checkbox"> カルシウム</label>
-                        <label><input type="checkbox"> ビタミンC</label>
-                        <label><input type="checkbox"> たんぱく質</label>
-                        <label><input type="checkbox"> 食物繊維</label>
-                    </div>
-                </div>
-                <!-- 栄養素条件 -->
-                <div class="nutrient-block">
-                    <div class="toggle-button">＋ 栄養素条件を追加</div>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox"> 鉄</label>
-                        <label><input type="checkbox"> カルシウム</label>
-                        <label><input type="checkbox"> ビタミンC</label>
-                        <label><input type="checkbox"> たんぱく質</label>
-                        <label><input type="checkbox"> 食物繊維</label>
-                    </div>
-                </div>
-                <!-- 詳細検索条件 -->
-                <div class="nutrient-block">
-                    <div class="toggle-button">＋ 詳細検索条件</div>
-                    <div class="checkbox-group">
-                        <!-- 塩分制限のトグル -->
-                        <div class="toggle-button sub-toggle">＋ 栄養バランス指定（P/F/C）</div>
-                        <ul class="sub-list">
-                            <label><input type="checkbox" name="low-salt"> P</label>
-                            <label><input type="checkbox" name="medium-salt"> F</label>
-                            <label><input type="checkbox" name="high-salt"> C</label>
-                        </ul>
-                        <!-- 塩分制限のトグル -->
-                        <div class="toggle-button sub-toggle">＋ 塩分制限</div>
-                        <ul class="sub-list">
-                            <label><input type="checkbox" name="low-salt"> 低塩</label>
-                            <label><input type="checkbox" name="medium-salt"> 中塩</label>
-                            <label><input type="checkbox" name="high-salt"> 高塩</label>
-                        </ul>
-                        <!-- 塩分制限のトグル -->
-                        <div class="toggle-button sub-toggle">＋ 食品の状態（生／加工）</div>
-                        <ul class="sub-list">
-                            <label><input type="checkbox" name="low-salt"> 生</label>
-                            <label><input type="checkbox" name="medium-salt"> 加工</label>
-                        </ul>
-                        <!-- 塩分制限のトグル -->
-                        <div class="toggle-button sub-toggle">＋ よく使う用途（和／洋／中）</div>
-                        <ul class="sub-list">
-                            <label><input type="checkbox" name="low-salt"> 和</label>
-                            <label><input type="checkbox" name="medium-salt"> 洋</label>
-                            <label><input type="checkbox" name="medium-salt"> 中</label>
-                        </ul>
-                    </div>
-                    <!-- 食品群別閲覧 -->
-                    <div class="nutrient-block">
-                        <div class="toggle-button">＋ 栄養素条件を追加</div>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox"> 鉄</label>
-                            <label><input type="checkbox"> カルシウム</label>
-                            <label><input type="checkbox"> ビタミンC</label>
-                            <label><input type="checkbox"> たんぱく質</label>
-                            <label><input type="checkbox"> 食物繊維</label>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <!-- script.js を読み込む -->
-                <script src="script.js"></script>
-
-
-                <!-- Nutrient chips (added conditions) -->
-                <div id="nutrient-area" style="margin-bottom:8px;display:none">
-                    <div class="nutrient-list" id="nutrient-list"></div>
-                    <div class="hint">※ 栄養素条件は「鉄: &gt;= 2mg」のように追加できます（ワイヤー実装）</div>
-                </div>
-                <div class="bg-white shadow-md rounded-2xl p-6">
-                    <h3 class="text-lg font-semibold mb-3">鉄：含有量トップ5（100gあたり）</h3>
-                    <ol class="list-decimal pl-5 space-y-1 text-sm">
-                        <li>バジル（粉） — 120mg</li>
-                        <li>タイム（粉） — 110mg</li>
-                        <li>赤こんにゃく — 78mg</li>
-                        <li>あおのり（素干し） — 77mg</li>
-                        <li>あゆ（内臓・焼き） — 63mg</li>
-                    </ol>
-                </div>
-                </section>
-
-                <!-- 更新情報 -->
-                <section class="bg-white shadow-md rounded-2xl p-6">
-                    <h3 class="text-lg font-semibold mb-3">更新情報</h3>
-                    <ul class="text-sm space-y-2">
-                        <li>📅 2023年8月16日：日本食品標準成分表（八訂）増補2023年に対応しました。</li>
+            <!-- 詳細検索条件 -->
+            <div class="nutrient-block">
+                <div class="toggle-button">＋ 食品カテゴリ</div>
+                <div class="checkbox-group">
+                    <div class="toggle-button sub-toggle">＋ 生鮮食品</div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox" name="pfc-p"> 野菜・果物</label>
+                        <label><input type="checkbox" name="pfc-f"> 玄米および精米</label>
+                        <label><input type="checkbox" name="pfc-c"> </label>
                     </ul>
-                </section>
 
-                <!-- 注意事項 -->
-                <section class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
-                    <h3 class="text-lg font-semibold text-yellow-800 mb-3">注意事項</h3>
-                    <p class="text-sm text-yellow-900 leading-relaxed">
-                        本データベースは文部科学省が提供する情報に基づき、食品成分データを検索・閲覧できるサイトです。<br>
-                        最新データは公式ページの「日本食品標準成分表（八訂）増補2023年」をご確認ください。
-                    </p>
-                </section>
+                    <div class="toggle-button sub-toggle">＋ 畜産物</div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox" name="pfc-p"> 成型肉・たれ付肉</label>
+                        <label><input type="checkbox" name="pfc-f"> 食肉【牛肉】</label>
+                        <label><input type="checkbox" name="pfc-c">食用鶏卵</label>
+                        <label><input type="checkbox" name="pfc-c">食肉</label>
+                    </ul>
 
+                    <div class="toggle-button sub-toggle">＋ 水産物</div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox" name="pfc-p"> 成型肉・たれ付肉</label>
+                        <label><input type="checkbox" name="pfc-f"> 食肉【牛肉】</label>
+                        <label><input type="checkbox" name="pfc-c">食用鶏卵</label>
+                        <label><input type="checkbox" name="pfc-c">食肉</label>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 栄養素条件 -->
+            <div class="nutrient-block">
+                <div class="toggle-button">＋ 栄養素条件を追加</div>
+                <div class="checkbox-group">
+
+                    <div class="toggle-button sub-toggle"></div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox"> 鉄</label>
+                        <label><input type="checkbox"> カルシウム</label>
+                        <label><input type="checkbox"> ビタミンC</label>
+                        <label><input type="checkbox"> たんぱく質</label>
+                        <label><input type="checkbox"> 食物繊維</label>
+                </div>
+            </div>
+
+            <!-- 詳細検索条件 -->
+            <div class="nutrient-block">
+                <div class="toggle-button">＋ 詳細検索条件</div>
+                <div class="checkbox-group">
+
+                    <div class="toggle-button sub-toggle">＋ 用途別</div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox" name="pfc-p"> ダイエット（低カロリー、高タンパク質）</label>
+                        <label><input type="checkbox" name="pfc-f"> 貧血対策（鉄分、ビタミンC、葉酸）</label>
+                        <label><input type="checkbox" name="pfc-c"> 筋トレ（高タンパク質、脂質、クレアチン、BCAA）</label>
+                    </ul>
+
+                    <div class="toggle-button sub-toggle">＋ 表示制度</div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox" name="low-salt"> トクホ</label>
+                        <label><input type="checkbox" name="medium-salt"> 機能性食品</label>
+                        <label><input type="checkbox" name="high-salt"> アレルゲン</label>
+                    </ul>
+
+                    <div class="toggle-button sub-toggle">＋ 原材料</div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox" name="raw"> 動物性</label>
+                        <label><input type="checkbox" name="processed"> 植物性</label>
+                        <label><input type="checkbox" name="raw"> 発酵食品</label>
+                        <label><input type="checkbox" name="processed"> 合成添加物</label>
+                    </ul>
+
+                    <div class="toggle-button sub-toggle">＋ 業界向け分類</div>
+                    <ul class="sub-list">
+                        <label><input type="checkbox" name="jp"> 病院食向け</label>
+                        <label><input type="checkbox" name="west"> 給食用</label>
+                        <label><input type="checkbox" name="cn"> スーパー向け</label>
+                    </ul>
+
+                </div>
+            </div>
+
+            <script src="script.js"></script>
+        </section>
+
+        <!-- 鉄ランキング -->
+        <section>
+            <h3>鉄：含有量トップ5（100gあたり）</h3>
+            <ol>
+                <li>バジル（粉） — 120mg</li>
+                <li>タイム（粉） — 110mg</li>
+                <li>赤こんにゃく — 78mg</li>
+                <li>あおのり（素干し） — 77mg</li>
+                <li>あゆ（内臓・焼き） — 63mg</li>
+            </ol>
+        </section>
+
+        <!-- 更新情報 -->
+        <section>
+            <h3>更新情報</h3>
+            <ul>
+                <li>📅 2023年8月16日：日本食品標準成分表（八訂）増補2023年に対応しました。</li>
+            </ul>
+        </section>
+
+        <!-- 注意事項 -->
+        <section style="background-color:#fff9e6; border:1px solid #ffe58f;">
+            <h3>注意事項</h3>
+            <p>
+                本データベースは文部科学省が提供する情報に基づき、食品成分データを検索・閲覧できるサイトです。<br>
+                最新データは公式ページの「日本食品標準成分表（八訂）増補2023年」をご確認ください。
+            </p>
+        </section>
     </main>
 
     <!-- フッター -->
-    <footer class="bg-gray-100 text-center py-6 text-sm text-gray-600">
+    <footer>
         © 2025 Japan Science and Technology Agency. All rights reserved.
     </footer>
 </body>

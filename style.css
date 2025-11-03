@@ -1,104 +1,134 @@
+/* ==== 全体共通 ==== */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f9f9f9;
-    padding: 50px;
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    margin: 0;
 }
 
-h1 {
+/* ヘッダー（そのまま） */
+header {
+    background-color: #17733f;
+    color: #fff;
+    padding: 6px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.site-logo {
+    height: 26px;
+}
+
+.site-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.main-nav a:hover {
+    text-decoration: underline;
+}
+
+/* ==== メイン ==== */
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* セクション共通 */
+section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     margin-bottom: 30px;
 }
 
-.search-form {
-    max-width: 600px;
-    margin: 0 auto;
+/* タイトル中央寄せ */
+section h2,
+section h3 {
+    text-align: center;
+    margin-bottom: 15px;
 }
 
-.search-row {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-input[type="text"] {
+/* 検索フォーム */
+.search-input input[type="text"] {
+    width: 100%;
     padding: 10px;
     font-size: 16px;
-    width: 70%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
 }
 
-input[type="submit"] {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+/* 栄養素条件・詳細検索条件 */
+.nutrient-block {
+    margin-top: 20px;
 }
 
-.advanced-search {
-    text-align: left;
-    margin-top: 30px;
-}
-
-.advanced-search label {
-    display: block;
-    margin: 10px 0;
-}
-
-select,
-input[type="date"] {
-    padding: 8px;
-    font-size: 16px;
-}
-
-/* 栄養素条件 */
-/* ▼ 初期状態では非表示 */
-.checkbox-group {
-    display: none;
-    margin-top: 10px;
-    padding: 10px;
-    background: #f1f3f5;
-    border-radius: 8px;
-}
-
-/* ラベルの間隔など軽い装飾 */
-.checkbox-group label {
-    display: block;
-    margin-bottom: 6px;
-}
-
-/* ＋ボタン部分（テキストリンク風） */
 .toggle-button {
-    display: inline-block;
-    color: #007bff;
-    cursor: pointer;
-    margin-top: 10px;
+    display: block;
     font-weight: bold;
+    color: #0073e6;
+    cursor: pointer;
+    margin-bottom: 5px;
 }
 
-/* 塩分制限（子要素）を一行下げる  */
 .checkbox-group {
-    display: none;
-    list-style: none;
+    background: #f1f3f5;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+/* チェックボックスのラベル */
+.checkbox-group label {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+/* サブリスト */
+.sub-list {
     padding-left: 20px;
-    /* 親チェックボックスより下げる */
+    margin-top: 5px;
 }
 
 .sub-toggle {
-    margin-left: 20px;
-    /* 一行下げたい場合 */
     font-weight: normal;
-    color: darkblue;
+    color: #005bb5;
+    margin-top: 10px;
+    display: block;
 }
 
-.sub-list {
-    display: none;
-    list-style: none;
-    padding-left: 40px;
-    /* 子チェックボックスをさらに下げる */
+/* 注意事項 */
+.notice-section {
+    background-color: #fff9e6;
+    border: 1px solid #ffe58f;
+    border-radius: 12px;
+    padding: 20px;
 }
 
-.toggle-button {
-    cursor: pointer;
-    color: blue;
-    font-weight: bold;
-    margin-bottom: 5px;
+/* フッター */
+.footer {
+    background-color: #17733f;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
 }
