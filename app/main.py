@@ -2,10 +2,11 @@ from flask import Flask, render_template, request
 import sqlite3, os
 
 # --- 設定 ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))        # app/
 DB_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "DB", "date.db"))
-TEMPLATE_DIR = os.path.join(BASE_DIR, '..', 'templates')
+TEMPLATE_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "templates"))  # templates をルートに設定
 print("📁 DB_PATH =", DB_PATH)
+print("📁 TEMPLATE_DIR =", TEMPLATE_DIR)
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR)
 
@@ -22,27 +23,31 @@ def query_db(keyword):
     conn.close()
     return rows
 
-# --- トップページ ---
-@app.route('/', methods=['GET', 'POST'])
+# --- トップページ（検索フォーム） ---
+@app.route('/', methods=['GET'])
 def index():
-    rows = []
-    keyword = ''
-    if request.method == 'POST':
-        keyword = request.form['keyword']
-        rows = query_db(keyword)
-    return render_template('index.html', rows=rows, keyword=keyword)
-# # CSVエクスポート用
-# @app.route('/export', methods=['POST'])
-# def export_csv():
-#     keyword = request.form['keyword']
-#     rows = query_db(keyword)
-#     os.makedirs('../export', exist_ok=True)
-#     filepath = '../export/result.csv'
-#     with open(filepath, 'w', newline='', encoding='utf-8') as f:
-#         writer = csv.writer(f)
-#         writer.writerow(['id', 'name', 'category', 'description'])
-#         writer.writerows(rows)
-#     return send_file(filepath, as_attachment=True)
+    return render_template('index.html')  # templates/index.html を参照
 
+# --- 検索結果ページ ---
+@app.route('/search', methods=['POST'])
+def search():
+    keyword = request.form['keyword']
+    rows = query_db(keyword)
+    return render_template('search/search_result.html', rows=rows, keyword=keyword)  # search/search_result.html を参照
+
+# --- その他の静的ページ ---
+@app.route('/whats', methods=['GET'])
+def what():
+    return render_template('whats.html')
+
+# --- その他の静的ページ ---
+@app.route('/help', methods=['GET'])
+def help_page():
+    return render_template('help.html')
+
+# --- その他の静的ページ ---
+@app.route('/answer', methods=['GET'])
+def answer():
+    return render_template('answer.html')
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
