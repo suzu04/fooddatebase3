@@ -78,12 +78,59 @@
         <!-- 検索ボックス -->
         <section>
             <h2>食品検索</h2>
-            <div>
-                <label for="q" class="hint">食品検索</label>
-                <div class="search-input">
-                    <input id="q" type="text" placeholder="🔍 キーワード入力（例：納豆、鉄）" aria-label="キーワード入力">
-                </div>
-            </div>
+            <form method="POST" action="/">
+                <input type="text" name="keyword" value="{{ keyword }}" placeholder="🔍 キーワード入力（例：納豆、鉄）" required>
+                <button type="submit">検索</button>
+            </form>
+
+            {% if rows %}
+            <section>
+                <h2>検索結果</h2>
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>グループ</th>
+                            <th>番号</th>
+                            <th>食品名</th>
+                            <th>エネルギー(kcal)</th>
+                            <th>たんぱく質(g)</th>
+                            <th>脂質(g)</th>
+                            <th>炭水化物(g)</th>
+                            <th>ナトリウム(mg)</th>
+                            <th>カリウム(mg)</th>
+                            <th>カルシウム(mg)</th>
+                            <th>マグネシウム(mg)</th>
+                            <th>リン(mg)</th>
+                            <th>鉄(mg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in rows %}
+                        <tr>
+                            <td>{{ row[0] }}</td> <!-- group -->
+                            <td>{{ row[1] }}</td> <!-- number -->
+                            <td>{{ row[2] }}</td> <!-- name -->
+                            <td>{{ row[3] }}</td> <!-- enerc_kcal -->
+                            <td>{{ row[4] }}</td> <!-- prot_ -->
+                            <td>{{ row[5] }}</td> <!-- fat_ -->
+                            <td>{{ row[6] }}</td> <!-- choavlm -->
+                            <td>{{ row[7] }}</td> <!-- na -->
+                            <td>{{ row[8] }}</td> <!-- k -->
+                            <td>{{ row[9] }}</td> <!-- ca -->
+                            <td>{{ row[10] }}</td> <!-- mg -->
+                            <td>{{ row[11] }}</td> <!-- p -->
+                            <td>{{ row[12] }}</td> <!-- fe -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+            {% elif keyword %}
+            <section>
+                <p>「{{ keyword }}」に一致する結果はありません。</p>
+            </section>
+            {% endif %}
+
 
             <!-- 詳細検索条件 -->
             <div class="nutrient-block">
