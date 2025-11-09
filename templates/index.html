@@ -6,12 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="食品成分データベースは、食品成分情報をわかりやすく提供するサイトです。">
     <title>食品成分データベース</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
 
-    <!-- フォント -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet"> -->
-
+    <!-- 基本スタイル -->
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
@@ -54,21 +50,25 @@
             margin-bottom: 30px;
         }
     </style>
+
+    <!-- 追加CSS（検索用トグルなど） -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search-toggle.css') }}">
 </head>
 
 <body>
     <!-- ヘッダー -->
     <header>
         <div>
-            <img src="images/logo.gif" alt="文部科学省" style="height:40px; vertical-align:middle;">
+            <img src="{{ url_for('static', filename='images/logo.gif') }}" alt="文部科学省"
+                style="height:40px; vertical-align:middle;">
             <h1 style="display:inline-block; margin-left:10px; font-size:20px;">食品成分データベース</h1>
         </div>
         <nav>
-            <a href="index.html">ホーム</a>
-            <a href="whats.html">食品成分DBとは</a>
-            <a href="search.html">検索</a>
-            <a href="help.html">ヘルプ</a>
-            <a href="mail.html">お問い合わせ</a>
+            <a href="{{ url_for('index') }}">ホーム</a>
+            <a href="{{ url_for('what') }}">食品成分DBとは</a>
+            <a href="{{ url_for('search') }}">検索</a>
+            <a href="{{ url_for('help') }}">ヘルプ</a>
+            <a href="{{ url_for('answer') }}">お問い合わせ</a>
         </nav>
     </header>
 
@@ -78,102 +78,46 @@
         <!-- 検索ボックス -->
         <section>
             <h2>食品検索</h2>
-            <form method="POST" action="/">
-                <input type="text" name="keyword" value="{{ keyword }}" placeholder="🔍 キーワード入力（例：納豆、鉄）" required>
+            <form method="POST" action="/search">
+                <input type="text" name="keyword" placeholder="🔍 キーワード入力（例：納豆、鉄）" required>
                 <button type="submit">検索</button>
             </form>
 
-            {% if rows %}
-            <section>
-                <h2>検索結果</h2>
-                <table border="1" cellpadding="5" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>グループ</th>
-                            <th>番号</th>
-                            <th>食品名</th>
-                            <th>エネルギー(kcal)</th>
-                            <th>たんぱく質(g)</th>
-                            <th>脂質(g)</th>
-                            <th>炭水化物(g)</th>
-                            <th>ナトリウム(mg)</th>
-                            <th>カリウム(mg)</th>
-                            <th>カルシウム(mg)</th>
-                            <th>マグネシウム(mg)</th>
-                            <th>リン(mg)</th>
-                            <th>鉄(mg)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in rows %}
-                        <tr>
-                            <td>{{ row[0] }}</td> <!-- group -->
-                            <td>{{ row[1] }}</td> <!-- number -->
-                            <td>{{ row[2] }}</td> <!-- name -->
-                            <td>{{ row[3] }}</td> <!-- enerc_kcal -->
-                            <td>{{ row[4] }}</td> <!-- prot_ -->
-                            <td>{{ row[5] }}</td> <!-- fat_ -->
-                            <td>{{ row[6] }}</td> <!-- choavlm -->
-                            <td>{{ row[7] }}</td> <!-- na -->
-                            <td>{{ row[8] }}</td> <!-- k -->
-                            <td>{{ row[9] }}</td> <!-- ca -->
-                            <td>{{ row[10] }}</td> <!-- mg -->
-                            <td>{{ row[11] }}</td> <!-- p -->
-                            <td>{{ row[12] }}</td> <!-- fe -->
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </section>
-            {% elif keyword %}
-            <section>
-                <p>「{{ keyword }}」に一致する結果はありません。</p>
-            </section>
-            {% endif %}
-
-
-            <!-- 詳細検索条件 -->
+            <!-- 食品カテゴリ -->
             <div class="nutrient-block">
                 <div class="toggle-button">＋ 食品カテゴリ</div>
                 <div class="checkbox-group">
+
                     <div class="toggle-button sub-toggle">＋ 生鮮食品</div>
                     <ul class="sub-list">
-                        <label><input type="checkbox" name="pfc-p"> 野菜・果物</label>
-                        <label><input type="checkbox" name="pfc-f"> 玄米および精米</label>
-                        <label><input type="checkbox" name="pfc-c"> </label>
+                        <li><label><input type="checkbox"> 野菜・果物</label></li>
+                        <li><label><input type="checkbox"> 玄米および精米</label></li>
                     </ul>
 
                     <div class="toggle-button sub-toggle">＋ 畜産物</div>
                     <ul class="sub-list">
-                        <label><input type="checkbox" name="pfc-p"> 成型肉・たれ付肉</label>
-                        <label><input type="checkbox" name="pfc-f"> 食肉【牛肉】</label>
-                        <label><input type="checkbox" name="pfc-c">食用鶏卵</label>
-                        <label><input type="checkbox" name="pfc-c">食肉</label>
+                        <li><label><input type="checkbox"> 成型肉・たれ付肉</label></li>
+                        <li><label><input type="checkbox"> 食肉【牛肉】</label></li>
+                        <li><label><input type="checkbox"> 食用鶏卵</label></li>
+                        <li><label><input type="checkbox"> 食肉</label></li>
                     </ul>
 
-                    <div class="toggle-button sub-toggle">＋ 水産物</div>
-                    <ul class="sub-list">
-                        <label><input type="checkbox" name="pfc-p"> 成型肉・たれ付肉</label>
-                        <label><input type="checkbox" name="pfc-f"> 食肉【牛肉】</label>
-                        <label><input type="checkbox" name="pfc-c">食用鶏卵</label>
-                        <label><input type="checkbox" name="pfc-c">食肉</label>
-                    </ul>
                 </div>
             </div>
+
 
             <!-- 栄養素条件 -->
             <div class="nutrient-block">
                 <div class="toggle-button">＋ 栄養素条件を追加</div>
-                <div class="checkbox-group">
 
-                    <div class="toggle-button sub-toggle"></div>
-                    <ul class="sub-list">
-                        <label><input type="checkbox"> 鉄</label>
-                        <label><input type="checkbox"> カルシウム</label>
-                        <label><input type="checkbox"> ビタミンC</label>
-                        <label><input type="checkbox"> たんぱく質</label>
-                        <label><input type="checkbox"> 食物繊維</label>
-                </div>
+                <ul class="sub-list">
+                    <li><label><input type="checkbox"> 鉄</label></li>
+                    <li><label><input type="checkbox"> カルシウム</label></li>
+                    <li><label><input type="checkbox"> ビタミンC</label></li>
+                    <li><label><input type="checkbox"> たんぱく質</label></li>
+                    <li><label><input type="checkbox"> 食物繊維</label></li>
+                </ul>
+            </div>
             </div>
 
             <!-- 詳細検索条件 -->
@@ -183,37 +127,39 @@
 
                     <div class="toggle-button sub-toggle">＋ 用途別</div>
                     <ul class="sub-list">
-                        <label><input type="checkbox" name="pfc-p"> ダイエット（低カロリー、高タンパク質）</label>
-                        <label><input type="checkbox" name="pfc-f"> 貧血対策（鉄分、ビタミンC、葉酸）</label>
-                        <label><input type="checkbox" name="pfc-c"> 筋トレ（高タンパク質、脂質、クレアチン、BCAA）</label>
+                        <li><label><input type="checkbox" name="pfc-p"> ダイエット（低カロリー、高タンパク質）</label></li>
+                        <li><label><input type="checkbox" name="pfc-f"> 貧血対策（鉄分、ビタミンC、葉酸）</label></li>
+                        <li><label><input type="checkbox" name="pfc-c"> 筋トレ（高タンパク質、脂質、クレアチン、BCAA）</label></li>
                     </ul>
 
                     <div class="toggle-button sub-toggle">＋ 表示制度</div>
                     <ul class="sub-list">
-                        <label><input type="checkbox" name="low-salt"> トクホ</label>
-                        <label><input type="checkbox" name="medium-salt"> 機能性食品</label>
-                        <label><input type="checkbox" name="high-salt"> アレルゲン</label>
+                        <li><label><input type="checkbox" name="low-salt"> トクホ</label></li>
+                        <li><label><input type="checkbox" name="medium-salt"> 機能性食品</label></li>
+                        <li><label><input type="checkbox" name="high-salt"> アレルゲン</label></li>
                     </ul>
 
                     <div class="toggle-button sub-toggle">＋ 原材料</div>
                     <ul class="sub-list">
-                        <label><input type="checkbox" name="raw"> 動物性</label>
-                        <label><input type="checkbox" name="processed"> 植物性</label>
-                        <label><input type="checkbox" name="raw"> 発酵食品</label>
-                        <label><input type="checkbox" name="processed"> 合成添加物</label>
+                        <li><label><input type="checkbox" name="raw"> 動物性</label></li>
+                        <li><label><input type="checkbox" name="processed"> 植物性</label></li>
+                        <li><label><input type="checkbox" name="raw"> 発酵食品</label></li>
+                        <li><label><input type="checkbox" name="processed"> 合成添加物</label></li>
                     </ul>
 
                     <div class="toggle-button sub-toggle">＋ 業界向け分類</div>
                     <ul class="sub-list">
-                        <label><input type="checkbox" name="jp"> 病院食向け</label>
-                        <label><input type="checkbox" name="west"> 給食用</label>
-                        <label><input type="checkbox" name="cn"> スーパー向け</label>
+                        <li><label><input type="checkbox" name="jp"> 病院食向け</label></li>
+                        <li><label><input type="checkbox" name="west"> 給食用</label></li>
+                        <li><label><input type="checkbox" name="cn"> スーパー向け</label></li>
                     </ul>
 
                 </div>
             </div>
 
-            <script src="script.js"></script>
+            <!-- JS読み込み -->
+            <script src="{{ url_for('static', filename='script.js') }}"></script>
+            <script src="{{ url_for('static', filename='toggle.js') }}"></script>
         </section>
 
         <!-- 鉄ランキング -->

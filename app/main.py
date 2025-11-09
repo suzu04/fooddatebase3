@@ -8,7 +8,15 @@ TEMPLATE_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "templates"))  # tem
 print("📁 DB_PATH =", DB_PATH)
 print("📁 TEMPLATE_DIR =", TEMPLATE_DIR)
 
-app = Flask(__name__, template_folder=TEMPLATE_DIR)
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+app = Flask(
+    __name__,
+    static_folder=os.path.join(BASE_DIR, 'static'),
+    template_folder=os.path.join(BASE_DIR, 'templates')
+)
+
 
 # --- DB検索関数 ---
 def query_db(keyword):
@@ -33,21 +41,25 @@ def index():
 def search():
     keyword = request.form['keyword']
     rows = query_db(keyword)
-    return render_template('search/search_result.html', rows=rows, keyword=keyword)  # search/search_result.html を参照
+    return render_template('page/search_result.html', rows=rows, keyword=keyword)
 
 # --- その他の静的ページ ---
-@app.route('/whats', methods=['GET'])
+@app.route('/what')
 def what():
-    return render_template('whats.html')
+    return render_template('page/what.html')
 
 # --- その他の静的ページ ---
-@app.route('/help', methods=['GET'])
-def help_page():
-    return render_template('help.html')
+@app.route('/help')
+def help():
+    return render_template('page/help.html')
 
 # --- その他の静的ページ ---
-@app.route('/answer', methods=['GET'])
+@app.route('/answer')
 def answer():
-    return render_template('answer.html')
+    return render_template('page/answer.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
